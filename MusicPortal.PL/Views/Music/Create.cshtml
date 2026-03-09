@@ -1,0 +1,61 @@
+﻿@model MusicPortal.BLL.DTO.MusicDTO
+
+@{
+    ViewBag.Title = "Добавить новый трек";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">🎵 Загрузка музыки</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label fw-bold">Название песни</label>
+                            <input asp-for="Name" class="form-control" placeholder="Введите название..." />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Author" class="form-label fw-bold">Исполнитель</label>
+                            <input asp-for="Author" class="form-control" placeholder="Имя артиста или группы" />
+                            <span asp-validation-for="Author" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Genre" class="form-label fw-bold">Жанр</label>
+                            <select asp-for="Genre" class="form-select">
+                                <option value="">Выберите жанр...</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Hip-Hop">Hip-Hop</option>
+                                <option value="Electronic">Electronic</option>
+                            </select>
+                            <span asp-validation-for="Genre" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Аудиофайл (m4a, mp3)</label>
+                            <input type="file" name="uploadedFile" class="form-control" accept="audio/*" />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Опубликовать</button>
+                            <a asp-action="Index" class="btn btn-link text-muted">Назад к списку</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

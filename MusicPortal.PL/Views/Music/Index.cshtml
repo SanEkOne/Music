@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MusicPortal.BLL.DTO.MusicDTO>
+
+@{
+    ViewBag.Title = "Музыкальный портал";
+}
+
+<div class="main">
+    <div class="music-container">
+        @{
+            var login = Context.Request.Cookies["login"];
+        }
+        <div class="music-header">
+            <h1>🎵 Моя Музыка</h1>
+            @if (login == "Admin")
+            {
+                <a asp-action="Create" class="add-btn">Добавить трек</a>
+            }
+            
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="music-card">
+
+                <div class="music-title">@item.Name</div>
+
+                <div class="music-author">
+                    Исполнитель: @item.Author
+                </div>
+
+                <div>
+                    Жанр: @item.Genre
+                </div>
+
+                @if (item.AudioData != null)
+                {
+                    <audio controls>
+                        <source src="data:audio/mpeg;base64,@Convert.ToBase64String(item.AudioData)" type="audio/mpeg">
+                    </audio>
+                }
+                
+                @if(login == "Admin")
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                }
+                
+            </div>
+        }
+
+    </div>
+</div>

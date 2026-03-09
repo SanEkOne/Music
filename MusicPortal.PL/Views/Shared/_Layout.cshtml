@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MusicPortal</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MusicPortal.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @{
+        var login = Context.Request.Cookies["login"];
+    }
+    <header>
+
+        <a asp-controller="Music" asp-action="Index" class="mainBTN">Главная</a>
+        @if (login != null)
+        {
+            <span class="userLogin">👤 @login</span>
+
+            @using (Html.BeginForm("Logout", "User", FormMethod.Get, new { @class = "inline" }))
+            {
+                <button type="submit" class="logout_BTN">Выйти</button>
+            }
+        }
+        else
+        {
+            <a asp-controller="User" asp-action="Index" class="regBTN">Регистрация</a>
+        }
+
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

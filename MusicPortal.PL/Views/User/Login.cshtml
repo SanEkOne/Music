@@ -1,0 +1,57 @@
+﻿@model MusicPortal.BLL.DTO.UserDTO
+
+@{
+    ViewData["Title"] = "Вход";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h4 class="mb-0">🔐 Авторизация</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Login" class="form-label fw-bold">Логин</label>
+                            <input asp-for="Login" class="form-control" placeholder="Введите ваш логин" />
+                            <span asp-validation-for="Login" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between">
+                                <label asp-for="Password" class="form-label fw-bold">Пароль</label>
+                            </div>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Введите пароль" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Войти</button>
+
+                            <div class="text-center mt-3">
+                                <span class="text-muted small">Еще нет аккаунта?</span>
+                                <a asp-action="Index" class="btn btn-link btn-sm p-0">Зарегистрироваться</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a asp-controller="Music" asp-action="Index" class="text-muted small text-decoration-none">← На главную</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
