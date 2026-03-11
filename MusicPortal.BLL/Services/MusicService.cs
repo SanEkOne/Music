@@ -37,18 +37,6 @@ namespace MusicPortal.BLL.Services
 
         public async Task Update(MusicDTO musicDTO)
         {
-            //var music = new Music
-            //{
-            //    Id = musicDTO.Id,
-            //    Name = musicDTO.Name,
-            //    Author = musicDTO.Author,
-            //    Genre = musicDTO.Genre,
-            //    AudioData = musicDTO.AudioData
-            //};
-
-            //Database.Musics.Update(music);
-            //await Database.Save();
-
             var music = await Database.Musics.Get(musicDTO.Id);
 
             if (music != null)
